@@ -1,6 +1,7 @@
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import { AuthProvider } from '@/context/AuthContext';
+import { SiteProvider } from '@/context/SiteContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartSidebar from '@/components/CartSidebar';
@@ -20,12 +21,14 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <AuthProvider>
-          <CartProvider>
-            <Navbar />
-            <CartSidebar />
-            <main>{children}</main>
-            <Footer />
-          </CartProvider>
+          <SiteProvider>
+            <CartProvider>
+              <Navbar />
+              <CartSidebar />
+              <main>{children}</main>
+              <Footer />
+            </CartProvider>
+          </SiteProvider>
         </AuthProvider>
       </body>
     </html>

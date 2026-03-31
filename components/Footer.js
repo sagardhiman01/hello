@@ -1,15 +1,21 @@
+'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useSite } from '@/context/SiteContext';
 
 export default function Footer() {
+  const pathname = usePathname();
+  const { settings } = useSite();
+
+  // Hide footer on admin pages
+  if (pathname?.startsWith('/admin')) return null;
+
   return (
     <footer className="footer">
       <div className="footer-grid">
         <div className="footer-brand">
-          <h3>THE AURIKA</h3>
-          <p>
-            Find Your Spark. Elevating everyday luxury with meticulously handcrafted jewelry 
-            that celebrates life's most precious moments.
-          </p>
+          <h3>{settings?.site_name || 'THE AURIKA'}</h3>
+          <p>{settings?.footer_about || 'Find Your Spark. Elevating everyday luxury with meticulously handcrafted jewelry that celebrates life\'s most precious moments.'}</p>
           <div className="footer-social">
             <a href="https://instagram.com/the_aurika_" target="_blank" rel="noopener noreferrer">Ig</a>
             <a href="#" target="_blank" rel="noopener noreferrer">Fb</a>
@@ -50,7 +56,7 @@ export default function Footer() {
       </div>
       
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} THE AURIKA. All rights reserved. 28, Indira Nagar Colony Rd, Vasant Vihar, Indra Nagar Colony, Dehradun, Uttarakhand 248006</p>
+        <p>&copy; {new Date().getFullYear()} {settings?.site_name || 'THE AURIKA'}. All rights reserved. {settings?.contact_address || ''}</p>
         <div className="footer-payment">
           <span>Razorpay</span>
           <span>Visa</span>

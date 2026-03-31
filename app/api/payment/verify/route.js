@@ -1,19 +1,19 @@
 import crypto from 'crypto';
 import { NextResponse } from 'next/server';
-import connectDB from '@/lib/mongodb';
-import Order from '@/models/Order';
+import prisma from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth';
 
 export async function POST(request) {
   try {
     const user = await requireAuth(request);
-    await connectDB();
     
     const { 
       razorpay_order_id, 
       razorpay_payment_id, 
       razorpay_signature,
-      orderData 
+      shippingAddress,
+      items,
+      totalAmount
     } = await request.json();
 
     // Verify payment signature
@@ -27,30 +27,39 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Payment verification failed' }, { status: 400 });
     }
 
-    // Create order in database
-    const order = await Order.create({
-      user: user.id,
-      ...orderData,
-      paymentResult: {
-        razorpay_order_id,
-        razorpay_payment_id,
-        razorpay_signature,
-        status: 'completed',
+    // Create order in SQLite database
+    const order = await prisma.order.create({
+      data: {
+        userId: user.id,
+        items: JSON.stringify(items || []),
+        shippingAddress: JSON.stringify(shippingAddress || {}),
+        subtotal: totalAmount,
+        shippingCharge: 0,
+        tax: 0,
+        totalAmount: totalAmount,
+        paymentMethod: 'razorpay',
+        paymentResult: JSON.stringify({
+          razorpay_order_id,
+          razorpay_payment_id,
+          razorpay_signature,
+          status: 'completed',
+        }),
+        isPaid: true,
+        paidAt: new Date(),
+        status: 'confirmed',
       },
-      isPaid: true,
-      paidAt: new Date(),
-      status: 'confirmed',
     });
 
     return NextResponse.json({
       success: true,
-      order: { id: order._id, status: order.status },
+      orderId: order.id,
       message: 'Payment verified and order placed successfully',
     });
   } catch (error) {
     if (error.message === 'Authentication required') {
       return NextResponse.json({ error: 'Please login to proceed' }, { status: 401 });
     }
+    console.error('Payment Verification Error:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

@@ -1,19 +1,18 @@
-import connectDB from '@/lib/mongodb';
-import User from '@/models/User';
+import prisma from '@/lib/prisma';
 import { generateToken } from '@/lib/auth';
 import { NextResponse } from 'next/server';
+import bcrypt from 'bcryptjs';
 
 export async function POST(request) {
   try {
-    await connectDB();
     const { email, password } = await request.json();
 
-    const user = await User.findOne({ email });
+    const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    const isMatch = await user.comparePassword(password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
@@ -22,7 +21,7 @@ export async function POST(request) {
 
     const response = NextResponse.json({
       success: true,
-      user: { id: user._id, name: user.name, email: user.email, role: user.role },
+      user: { id: user.id, name: user.name, email: user.email, role: user.role },
       token,
     });
 
@@ -35,6 +34,7 @@ export async function POST(request) {
 
     return response;
   } catch (error) {
+    console.error('Login Error:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

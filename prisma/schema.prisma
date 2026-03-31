@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  phone     String?
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+}
+
+model Product {
+  id           Int      @id @default(autoincrement())
+  name         String
+  slug         String   @unique
+  description  String
+  price        Float
+  comparePrice Float?
+  category     String
+  material     String   @default("Gold")
+  purity       String   @default("22K")
+  weight       String?
+  images       String   // JSON string of images array
+  inStock      Boolean  @default(true)
+  featured     Boolean  @default(false)
+  bestSeller   Boolean  @default(false)
+  newArrival   Boolean  @default(false)
+  rating       Float    @default(0)
+  reviewCount  Int      @default(0)
+  tags         String?  // JSON string of tags array
+  sku          String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SiteSettings {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String   // JSON string
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id              Int      @id @default(autoincrement())
+  user            User     @relation(fields: [userId], references: [id])
+  userId          Int
+  items           String   // JSON string of order items
+  shippingAddress String   // JSON string of address
+  paymentMethod   String   @default("razorpay")
+  paymentResult   String?  // JSON string of razorpay details
+  subtotal        Float
+  shippingCharge  Float    @default(0)
+  tax             Float    @default(0)
+  totalAmount     Float
+  status          String   @default("pending")
+  trackingId      String?
+  isPaid          Boolean  @default(false)
+  paidAt          DateTime?
+  isDelivered     Boolean  @default(false)
+  deliveredAt     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

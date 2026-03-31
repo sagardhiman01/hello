@@ -1,24 +1,27 @@
-import connectDB from '@/lib/mongodb';
-import User from '@/models/User';
+import prisma from '@/lib/prisma';
 import { generateToken } from '@/lib/auth';
 import { NextResponse } from 'next/server';
+import bcrypt from 'bcryptjs';
 
 export async function POST(request) {
   try {
-    await connectDB();
     const { name, email, password, phone } = await request.json();
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
       return NextResponse.json({ error: 'User already exists' }, { status: 400 });
     }
 
-    const user = await User.create({ name, email, password, phone });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await prisma.user.create({
+      data: { name, email, password: hashedPassword, phone, role: 'user' }
+    });
+
     const token = generateToken(user);
 
     const response = NextResponse.json({
       success: true,
-      user: { id: user._id, name: user.name, email: user.email, role: user.role },
+      user: { id: user.id, name: user.name, email: user.email, role: user.role },
       token,
     });
 
@@ -31,6 +34,7 @@ export async function POST(request) {
 
     return response;
   } catch (error) {
+    console.error('Registration Error:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
