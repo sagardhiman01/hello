@@ -1,10 +1,10 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useSearchParams } from 'next/navigation';
 
-export default function ProductsPage() {
+function ProductsContent() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
@@ -75,5 +75,13 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div style={{ paddingTop: '10rem', textAlign: 'center' }}>Loading Collections...</div>}>
+      <ProductsContent />
+    </Suspense>
   );
 }
