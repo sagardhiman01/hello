@@ -5,6 +5,7 @@ import { SiteProvider } from '@/context/SiteContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartSidebar from '@/components/CartSidebar';
+import ClickTracker from '@/components/ClickTracker';
 
 export const metadata = {
   title: 'THE AURIKA | Find Your Spark - Luxury Jewelry',
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <SiteProvider>
             <CartProvider>
+              <ClickTracker />
               <Navbar />
               <CartSidebar />
               <main>{children}</main>

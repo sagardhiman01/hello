@@ -27,6 +27,7 @@ export default function AdminLayout({ children }) {
     { icon: '💎', label: 'Products', href: '/admin/products' },
     { icon: '📦', label: 'Orders', href: '/admin/orders' },
     { icon: '👥', label: 'Customers', href: '/admin/customers' },
+    { icon: '🔴', label: 'Live Activity', href: '/admin/activity' },
   ];
 
   return (

@@ -42,6 +42,11 @@ const defaults = {
   contact_email: 'concierge@theaurika.com',
   newsletter_title: 'Join the Inner Circle',
   newsletter_text: 'Subscribe to our newsletter for exclusive early access to new collections, special private events, and styling inspiration.',
+  razorpay_key_id: '',
+  razorpay_key_secret: '',
+  razorpay_enabled: 'false',
+  cod_enabled: 'true',
+  payment_currency: 'INR',
 };
 
 export async function GET() {

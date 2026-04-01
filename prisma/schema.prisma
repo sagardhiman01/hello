@@ -12,16 +12,25 @@ datasource db {
 
 
 
-model User {
+model ClickEvent {
   id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
-  phone     String?
-  role      String   @default("user")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  orders    Order[]
+  userId    Int?     // Optional, for logged-in users
+  path      String   // URL where click happened
+  element   String   // Text or ID of element clicked
+  timestamp DateTime @default(now())
+  ip        String?  // Optional for anonymous tracking
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  name        String
+  email       String       @unique
+  password    String
+  phone       String?
+  role        String       @default("user")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  orders      Order[]
 }
 
 model Product {

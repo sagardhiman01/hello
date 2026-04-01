@@ -72,7 +72,7 @@ export default function CheckoutPage() {
 
       // 2. Open Razorpay Checkout
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        key: orderData.key,
         amount: orderData.order.amount,
         currency: orderData.order.currency,
         name: 'THE AURIKA',

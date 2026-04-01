@@ -47,6 +47,7 @@ export default function SiteSettingsPage() {
     { id: 'categories', label: '📂 Categories', icon: '📂' },
     { id: 'testimonials', label: '⭐ Testimonials', icon: '⭐' },
     { id: 'contact', label: '📞 Contact & Footer', icon: '📞' },
+    { id: 'payment', label: '💳 Payment Gateway', icon: '💳' },
   ];
 
   const categories = (() => {
@@ -294,6 +295,69 @@ export default function SiteSettingsPage() {
             <div className="admin-field">
               <label>Footer About Text</label>
               <textarea rows={3} value={settings.footer_about} onChange={e => handleChange('footer_about', e.target.value)} />
+            </div>
+          </div>
+        )}
+
+        {/* PAYMENT GATEWAY */}
+        {activeTab === 'payment' && (
+          <div className="settings-section">
+            <h3 className="settings-section-title">💳 Razorpay Configuration</h3>
+            <p className="settings-section-subtitle" style={{ marginBottom: '1.5rem', opacity: 0.7 }}>Configure your Razorpay API keys to accept payments.</p>
+            
+            <div className="admin-field">
+              <label>Razorpay Key ID</label>
+              <input 
+                type="text" 
+                placeholder="rzp_test_..." 
+                value={settings.razorpay_key_id || ''} 
+                onChange={e => handleChange('razorpay_key_id', e.target.value)} 
+              />
+            </div>
+            
+            <div className="admin-field">
+              <label>Razorpay Key Secret</label>
+              <input 
+                type="password" 
+                placeholder="••••••••••••••••" 
+                value={settings.razorpay_key_secret || ''} 
+                onChange={e => handleChange('razorpay_key_secret', e.target.value)} 
+              />
+            </div>
+
+            <div className="form-grid">
+              <div className="admin-field">
+                <label>Enable Razorpay</label>
+                <select 
+                  value={settings.razorpay_enabled || 'false'} 
+                  onChange={e => handleChange('razorpay_enabled', e.target.value)}
+                  className="admin-select"
+                >
+                  <option value="true">✅ Enabled</option>
+                  <option value="false">❌ Disabled</option>
+                </select>
+              </div>
+              <div className="admin-field">
+                <label>Currency</label>
+                <input 
+                  type="text" 
+                  value={settings.payment_currency || 'INR'} 
+                  onChange={e => handleChange('payment_currency', e.target.value)} 
+                />
+              </div>
+            </div>
+
+            <h3 className="settings-section-title" style={{ marginTop: '2rem' }}>🚚 Offline Payment</h3>
+            <div className="admin-field">
+              <label>Enable Cash on Delivery (COD)</label>
+              <select 
+                value={settings.cod_enabled || 'false'} 
+                onChange={e => handleChange('cod_enabled', e.target.value)}
+                className="admin-select"
+              >
+                <option value="true">✅ Enabled</option>
+                <option value="false">❌ Disabled</option>
+              </select>
             </div>
           </div>
         )}

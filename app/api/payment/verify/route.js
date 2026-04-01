@@ -1,11 +1,13 @@
 import crypto from 'crypto';
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth';
+import { getSettings } from '@/lib/settings';
 
 export async function POST(request) {
   try {
     const user = await requireAuth(request);
+    const settings = await getSettings();
     
     const { 
       razorpay_order_id, 
@@ -19,7 +21,7 @@ export async function POST(request) {
     // Verify payment signature
     const body = razorpay_order_id + '|' + razorpay_payment_id;
     const expectedSignature = crypto
-      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+      .createHmac('sha256', settings.razorpay_key_secret)
       .update(body.toString())
       .digest('hex');
 

@@ -5,20 +5,10 @@ export default function AdminCustomersPage() {
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
-    fetch('/api/admin/orders')
+    fetch('/api/admin/users')
       .then(r => r.json())
       .then(d => {
-        if (d.success) {
-          const map = {};
-          d.orders.forEach(o => {
-            if (!map[o.userId]) {
-              map[o.userId] = { ...o.user, id: o.userId, orders: 0, totalSpent: 0 };
-            }
-            map[o.userId].orders += 1;
-            map[o.userId].totalSpent += o.totalAmount || 0;
-          });
-          setCustomers(Object.values(map));
-        }
+        if (d.success) setCustomers(d.users);
       });
   }, []);
 
