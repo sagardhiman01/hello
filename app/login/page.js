@@ -23,7 +23,11 @@ function LoginContent() {
     try {
       const res = await login(email, password);
       if (res.success) {
-        router.push('/');
+        if (res.user.role?.toLowerCase() === 'admin') {
+          router.push('/admin');
+        } else {
+          router.push('/');
+        }
       } else {
         setError(res.error || 'Invalid email or password.');
       }

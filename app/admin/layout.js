@@ -11,12 +11,12 @@ export default function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
-    if (!loading && (!user || user.role !== 'admin')) {
+    if (!loading && (!user || user.role?.toLowerCase() !== 'admin')) {
       router.push('/login');
     }
   }, [user, loading, router]);
 
-  if (loading || !user || user.role !== 'admin') {
+  if (loading || !user || user.role?.toLowerCase() !== 'admin') {
     return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0f0f0f', color: '#C4995C' }}>Loading Admin Panel...</div>;
   }
 
