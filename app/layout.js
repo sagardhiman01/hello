@@ -5,12 +5,11 @@ import { SiteProvider } from '@/context/SiteContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartSidebar from '@/components/CartSidebar';
-import ClickTracker from '@/components/ClickTracker';
 
 export const metadata = {
-  title: 'THE AURIKA | Find Your Spark - Luxury Jewelry',
-  description: 'Discover exquisite handcrafted jewelry at THE AURIKA. Premium gold, diamond & pearl collections. Find Your Spark with our curated jewelry pieces. Shop necklaces, rings, earrings, bracelets & more.',
-  keywords: 'jewelry, gold jewelry, diamond rings, pearl earrings, luxury jewelry, THE AURIKA, Dehradun jewelry, Indian jewelry, bridal jewelry',
+  title: 'THE AURIKA | Find Your Spark - Premium Jewelry',
+  description: 'Discover exquisite handcrafted jewelry at THE AURIKA. Premium Grade, diamond & pearl collections. Find Your Spark with our curated contemporary jewelry pieces. Shop necklaces, rings, earrings, bracelets & more.',
+  keywords: 'jewelry, premium jewelry, artificial jewelry, contemporary design, diamond rings, pearl earrings, luxury jewelry, THE AURIKA, Dehradun jewelry, Indian jewelry, bridal jewelry',
 };
 
 export default function RootLayout({ children }) {
@@ -24,7 +23,6 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <SiteProvider>
             <CartProvider>
-              <ClickTracker />
               <Navbar />
               <CartSidebar />
               <main>{children}</main>

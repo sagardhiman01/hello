@@ -18,12 +18,21 @@ function ProductsContent() {
         let url = '/api/products';
         if (category) url += `?category=${category}`;
         const res = await fetch(url);
+        
+        if (!res.ok) {
+          throw new Error(`Server returned ${res.status}`);
+        }
+        
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);
+        } else {
+          throw new Error(data.error || 'Failed to fetch products');
         }
       } catch (error) {
-        console.error('Failed to load products', error);
+        console.error('Failed to load products:', error);
+        // Show error message to user via state if needed, or just set empty products
+        setProducts([]);
       } finally {
         setLoading(false);
       }
