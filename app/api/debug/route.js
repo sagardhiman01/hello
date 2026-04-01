@@ -2,26 +2,30 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+import prisma from '@/lib/prisma';
+
 export async function GET() {
   const cwd = process.cwd();
-  const dirName = __dirname;
   
-  const possiblePaths = [
-    path.join(cwd, 'prisma', 'dev.db'),
-    path.join(cwd, 'dev.db'),
-    path.join(cwd, '..', 'prisma', 'dev.db'),
-    '/home/customer/www/theaurika.in/public_html/prisma/dev.db', // Common Hostinger path format
+  const results = [
+    {
+      path: path.join(cwd, 'prisma', 'dev.db'),
+      exists: fs.existsSync(path.join(cwd, 'prisma', 'dev.db'))
+    }
   ];
 
-  const results = possiblePaths.map(p => ({
-    path: p,
-    exists: fs.existsSync(p)
-  }));
+  let prismaTest = "Not attempted";
+  try {
+    const userCount = await prisma.user.count();
+    prismaTest = `Success: ${userCount} users found`;
+  } catch (e) {
+    prismaTest = `Error: ${e.message}`;
+  }
 
   return NextResponse.json({
     cwd,
-    dirName,
     results,
+    prismaTest,
     env: process.env.NODE_ENV
   });
 }
