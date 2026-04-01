@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function LoginPage() {
+import { Suspense } from 'react';
+
+function LoginContent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -34,7 +36,6 @@ export default function LoginPage() {
 
   return (
     <div className="auth-page">
-      {/* Decorative Elements */}
       <div className="auth-decor auth-decor-1"></div>
       <div className="auth-decor auth-decor-2"></div>
       
@@ -44,7 +45,6 @@ export default function LoginPage() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="auth-card"
       >
-        {/* Logo */}
         <motion.div 
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -112,6 +112,7 @@ export default function LoginPage() {
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 className="auth-error"
+                style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}
               >
                 {error}
               </motion.div>
@@ -151,5 +152,13 @@ export default function LoginPage() {
         </motion.div>
       </motion.div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div style={{ paddingTop: '10rem', textAlign: 'center' }}>Loading Login Masterpiece...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }
