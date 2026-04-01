@@ -7,7 +7,9 @@ import { execSync } from 'child_process';
 async function initializeDatabase() {
   try {
     console.log('Initializing database on the fly...');
-    execSync('npx prisma db push --accept-data-loss');
+    // Using direct node path for reliability on Hostinger
+    const { execSync } = require('child_process');
+    execSync('node node_modules/prisma/build/index.js db push --accept-data-loss');
     // Also ensuring admin exists
     const hashedPassword = await bcrypt.hash('macstudio123456', 12);
     await prisma.user.upsert({
