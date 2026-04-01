@@ -1,12 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  // Standard config for Hostinger
   productionBrowserSourceMaps: false,
   swcMinify: true,
-  experimental: {
-    webpackBuildWorker: true,
-    parallelServerCompiles: true,
-  },
 };
 
 export default nextConfig;
