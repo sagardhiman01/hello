@@ -6,16 +6,8 @@ export async function POST(req) {
     const body = await req.json();
     const { path, element, userId } = body;
 
-    const click = await prisma.clickEvent.create({
-      data: {
-        userId: userId ? parseInt(userId) : null,
-        path: path || 'unknown',
-        element: element || 'unknown',
-        timestamp: new Date(),
-      },
-    });
-
-    return NextResponse.json({ success: true, click });
+    // Failsafe: Return success immediately without writing to DB to prevent 503 crashes on Hostinger
+    return NextResponse.json({ success: true, message: 'Tracking disabled for stability' });
   } catch (error) {
     console.error('Track Click Error:', error);
     return NextResponse.json({ success: false, error: 'Failed to log click' }, { status: 500 });
