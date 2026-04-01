@@ -16,6 +16,8 @@ export default function ClickTracker() {
 
       if (path.startsWith('/admin')) return;
 
+      /* 
+      // Disabling high-frequency tracking to prevent 503 Crashes on Hostinger
       fetch('/api/track/click', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -25,6 +27,7 @@ export default function ClickTracker() {
           userId: user?.id 
         }),
       }).catch(err => console.error('Tracking Failed:', err));
+      */
     };
 
     window.addEventListener('mousedown', handleClick);

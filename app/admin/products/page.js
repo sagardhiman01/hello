@@ -8,7 +8,7 @@ export default function AdminProductsPage() {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     name: '', description: '', price: '', comparePrice: '', category: 'Necklaces',
-    material: 'Gold', purity: '22K', weight: '', images: '', inStock: true,
+    material: 'Premium Alloy', purity: 'Premium Grade', weight: '', images: '', inStock: true,
     featured: false, bestSeller: false, newArrival: false, sku: '',
   });
 
@@ -22,7 +22,7 @@ export default function AdminProductsPage() {
   useEffect(() => { fetchProducts(); }, []);
 
   const resetForm = () => {
-    setFormData({ name: '', description: '', price: '', comparePrice: '', category: 'Necklaces', material: 'Gold', purity: '22K', weight: '', images: '', inStock: true, featured: false, bestSeller: false, newArrival: false, sku: '' });
+    setFormData({ name: '', description: '', price: '', comparePrice: '', category: 'Necklaces', material: 'Premium Alloy', purity: 'Premium Grade', weight: '', images: '', inStock: true, featured: false, bestSeller: false, newArrival: false, sku: '' });
     setEditProduct(null);
   };
 
@@ -101,7 +101,7 @@ export default function AdminProductsPage() {
               <div className="admin-field"><label>Material</label><input value={formData.material} onChange={e => setFormData({...formData, material: e.target.value})} /></div>
               <div className="admin-field"><label>Purity</label>
                 <select value={formData.purity} onChange={e => setFormData({...formData, purity: e.target.value})}>
-                  {['14K','18K','22K','24K'].map(p => <option key={p}>{p}</option>)}
+                  {['Premium Grade','High Finish','Artisan','A+ Grade'].map(p => <option key={p}>{p}</option>)}
                 </select>
               </div>
             </div>

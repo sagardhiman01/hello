@@ -67,7 +67,7 @@ export default function Home() {
           <div className="hero-image-container">
             <div className="hero-floating-card card-1">
               <div className="card-label">Bestseller</div>
-              <div className="card-value">{settings?.hero_stat_1 || '22K'} <small>{settings?.hero_stat_1_label || 'Gold'}</small></div>
+              <div className="card-value">{settings?.hero_stat_1 || 'Premium'} <small>{settings?.hero_stat_1_label || 'Quality'}</small></div>
             </div>
             
             <div className="hero-image-frame">
@@ -152,15 +152,15 @@ export default function Home() {
           <div className="featured-banner-content">
             <div className="section-label" style={{ color: 'var(--gold-light)' }}>The Masterpiece</div>
             <h2>{settings?.banner_title || 'Uncompromising Quality & Craftsmanship'}</h2>
-            <p>{settings?.banner_text || 'At THE AURIKA, we source only the finest ethically mined diamonds, pearls, and precious metals.'}</p>
+            <p>{settings?.banner_text || 'At THE AURIKA, we source only the finest ethically curated materials, pearls, and premium metals.'}</p>
             <div className="featured-stats">
               <div className="featured-stat">
-                <div className="stat-number">{settings?.hero_stat_1 || '22K'}</div>
-                <div className="stat-label">{settings?.hero_stat_1_label || 'Purity Gold'}</div>
+                <div className="stat-number">{settings?.hero_stat_1 || 'Premium'}</div>
+                <div className="stat-label">{settings?.hero_stat_1_label || 'Quality'}</div>
               </div>
               <div className="featured-stat">
                 <div className="stat-number">{settings?.hero_stat_2 || '100%'}</div>
-                <div className="stat-label">{settings?.hero_stat_2_label || 'Ethical Gems'}</div>
+                <div className="stat-label">{settings?.hero_stat_2_label || 'Expert Curation'}</div>
               </div>
               <div className="featured-stat">
                 <div className="stat-number">{settings?.hero_stat_3 || 'Life'}</div>

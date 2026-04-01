@@ -42,7 +42,7 @@ model Product {
   comparePrice Float?
   category     String
   material     String   @default("Gold")
-  purity       String   @default("22K")
+  purity       String   @default("Premium")
   weight       String?
   images       String   // JSON string of images array
   inStock      Boolean  @default(true)

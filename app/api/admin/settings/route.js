@@ -11,14 +11,14 @@ const defaults = {
   hero_subtitle: 'Meticulously handcrafted contemporary and classical jewelry. Every piece tells a story of unparalleled craftsmanship and timeless luxury.',
   hero_badge: 'Find Your Spark',
   hero_image: '/images/temple_necklace.jpg',
-  hero_stat_1: '22K',
-  hero_stat_1_label: 'Purity Gold',
+  hero_stat_1: 'Premium',
+  hero_stat_1_label: 'Quality',
   hero_stat_2: '100%',
-  hero_stat_2_label: 'Ethical Gems',
+  hero_stat_2_label: 'Custom Designs',
   hero_stat_3: 'Life',
   hero_stat_3_label: 'Time Warranty',
   banner_title: 'Uncompromising Quality & Craftsmanship',
-  banner_text: 'At THE AURIKA, we source only the finest ethically mined diamonds, pearls, and precious metals. Every creation is born from a meticulous design process, ensuring each detail reflects our commitment to perfection.',
+  banner_text: 'At THE AURIKA, we source only the finest ethically curated materials, pearls, and premium metals. Every creation is born from a meticulous design process, ensuring each detail reflects our commitment to perfection.',
   testimonials: JSON.stringify([
     { stars: 5, text: 'Finding my spark was easy with THE AURIKA. The American Diamond set I purchased is an absolute masterpiece.', name: 'Ananya Sharma', location: 'New Delhi' },
     { stars: 5, text: 'I ordered the Temple Heritage Necklace for my wedding. The piece looks exactly as pictured, if not better.', name: 'Rhea Kapoor', location: 'Mumbai' },
@@ -26,7 +26,7 @@ const defaults = {
   ]),
   slider_images: JSON.stringify([
     { url: '/images/temple_necklace.jpg', title: 'The Royal Heritage', category: 'Handcrafted Necklaces', description: 'A masterpiece that captures the essence of divine craftsmanship.' },
-    { url: '/images/sapphire_necklace.jpg', title: 'Azure Dreams', category: 'Premium Collection', description: 'Ethically sourced sapphires meet 22K pure gold elegance.' },
+    { url: '/images/sapphire_necklace.jpg', title: 'Azure Dreams', category: 'Premium Collection', description: 'Ethically curated stones meet premium gold-plated elegance.' },
     { url: '/images/rose_quartz_necklace.jpg', title: 'Ethereal Rose', category: 'Artisan Selection', description: 'Delicate textures meet timeless beauty in every detail.' },
     { url: '/images/american_diamond_set.jpg', title: 'Divine Radiance', category: 'Bridal Sets', description: 'Shine brighter on your special day with our signature collection.' }
   ]),

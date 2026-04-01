@@ -11,8 +11,8 @@ const ProductSchema = new mongoose.Schema({
     required: true, 
     enum: ['Necklaces', 'Rings', 'Earrings', 'Bracelets', 'Pendants', 'Sets', 'Bangles', 'Anklets']
   },
-  material: { type: String, default: 'Gold' },
-  purity: { type: String, enum: ['14K', '18K', '22K', '24K'], default: '22K' },
+  material: { type: String, default: 'Premium Alloy' },
+  purity: { type: String, enum: ['Premium Grade', 'High Finish', 'Artisan', 'A+ Grade'], default: 'Premium Grade' },
   weight: { type: String },
   images: [{ type: String }],
   inStock: { type: Boolean, default: true },

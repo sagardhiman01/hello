@@ -20,7 +20,7 @@ export default function AboutPage() {
               Founded in 2025, THE AURIKA was born from a passion for preserving traditional Indian craftsmanship while embracing contemporary design. Our journey began in Dehradun, where we sought to create pieces that bridge the gap between heritage and modern luxury.
             </p>
             <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--text-light)' }}>
-              Every gemstone is handpicked, every metal is certified for purity, and every design is a labor of love. We don't just make jewelry; we create heirlooms that can be passed down through generations.
+              Every material is handpicked, every piece is certified for quality, and every design is a labor of love. We don't just make jewelry; we create accessories that celebrate your unique personality.
             </p>
           </div>
         </div>
@@ -31,7 +31,7 @@ export default function AboutPage() {
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✨</div>
               <h4 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Uncompromised Quality</h4>
-              <p style={{ color: 'var(--text-light)' }}>We use only 22K/18K certified gold and ethically sourced gemstones in all our creations.</p>
+              <p style={{ color: 'var(--text-light)' }}>We use only the finest skin-friendly premium alloys and ethically sourced stones in all our creations.</p>
             </div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎨</div>
