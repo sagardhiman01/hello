@@ -7,6 +7,11 @@ export async function POST(request) {
   try {
     const { name, email, password, phone } = await request.json();
 
+    if (!process.env.JWT_SECRET) {
+      console.error('SERVER CONFIG ERROR: JWT_SECRET is not defined');
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
+
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
       return NextResponse.json({ error: 'User already exists' }, { status: 400 });

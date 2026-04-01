@@ -7,6 +7,11 @@ export async function POST(request) {
   try {
     const { email, password } = await request.json();
 
+    if (!process.env.JWT_SECRET) {
+      console.error('SERVER CONFIG ERROR: JWT_SECRET is not defined');
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
+
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
