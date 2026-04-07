@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useSite } from '@/context/SiteContext';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 export default function AdminSliderPage() {
   const { refreshSettings } = useSite();
@@ -69,7 +70,10 @@ export default function AdminSliderPage() {
           <div className="admin-field"><label>Description</label><input value={slide.description} onChange={e => updateSlide(i, 'description', e.target.value)} /></div>
           <div className="admin-field">
             <label>Image Path</label>
-            <input value={slide.url} onChange={e => updateSlide(i, 'url', e.target.value)} />
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+              <input style={{ flexgrow: 1 }} value={slide.url} onChange={e => updateSlide(i, 'url', e.target.value)} />
+              <ImageUpload onUploadSuccess={(url) => updateSlide(i, 'url', url)} label="Upload New" />
+            </div>
             {slide.url && <img src={slide.url} alt="" style={{ width: 200, height: 120, objectFit: 'cover', borderRadius: 12, marginTop: 8 }} />}
           </div>
         </div>

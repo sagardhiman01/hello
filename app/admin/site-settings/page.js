@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useSite } from '@/context/SiteContext';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 export default function SiteSettingsPage() {
   const { refreshSettings } = useSite();
@@ -136,7 +137,11 @@ export default function SiteSettingsPage() {
             </div>
             <div className="admin-field">
               <label>Hero Image Path</label>
-              <input value={settings.hero_image} onChange={e => handleChange('hero_image', e.target.value)} />
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                <input style={{ flexGrow: 1 }} value={settings.hero_image} onChange={e => handleChange('hero_image', e.target.value)} />
+                <ImageUpload onUploadSuccess={(url) => handleChange('hero_image', url)} label="Upload New Hero" />
+              </div>
+              {settings.hero_image && <img src={settings.hero_image} alt="" style={{ width: 200, height: 120, objectFit: 'cover', borderRadius: 12, marginTop: 8 }} />}
             </div>
             <h3 className="settings-section-title" style={{ marginTop: '2rem' }}>📊 Hero Stats</h3>
             <div className="form-grid form-grid-3">
@@ -215,11 +220,18 @@ export default function SiteSettingsPage() {
                 <div className="form-grid">
                   <div className="admin-field">
                     <label>Image Path</label>
-                    <input value={cat.image} onChange={e => {
-                      const updated = [...categories];
-                      updated[i] = { ...updated[i], image: e.target.value };
-                      handleChange('categories', JSON.stringify(updated));
-                    }} />
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
+                      <input style={{ flexGrow: 1 }} value={cat.image} onChange={e => {
+                        const updated = [...categories];
+                        updated[i] = { ...updated[i], image: e.target.value };
+                        handleChange('categories', JSON.stringify(updated));
+                      }} />
+                      <ImageUpload onUploadSuccess={(url) => {
+                        const updated = [...categories];
+                        updated[i] = { ...updated[i], image: url };
+                        handleChange('categories', JSON.stringify(updated));
+                      }} label="Upload" />
+                    </div>
                   </div>
                   <div className="admin-field">
                     <label>Subtitle</label>
@@ -230,6 +242,7 @@ export default function SiteSettingsPage() {
                     }} />
                   </div>
                 </div>
+                {cat.image && <img src={cat.image} alt="" style={{ width: 120, height: 80, objectFit: 'cover', borderRadius: 8, marginTop: 8 }} />}
               </div>
             ))}
           </div>

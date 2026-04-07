@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState([]);
@@ -35,6 +36,12 @@ export default function AdminProductsPage() {
     });
     setEditProduct(product);
     setShowForm(true);
+  };
+
+  const handleUploadSuccess = (url) => {
+    const existing = formData.images ? formData.images.split(',').map(s => s.trim()) : [];
+    const updated = [...existing, url].join(', ');
+    setFormData({ ...formData, images: updated });
   };
 
   const handleSubmit = async (e) => {
@@ -105,7 +112,24 @@ export default function AdminProductsPage() {
                 </select>
               </div>
             </div>
-            <div className="admin-field"><label>Images (comma-separated paths)</label><input value={formData.images} onChange={e => setFormData({...formData, images: e.target.value})} placeholder="/images/product1.jpg, /images/product2.jpg" /></div>
+            
+            <div className="form-grid">
+              <div className="admin-field">
+                <label>Images (Paths)</label>
+                <input value={formData.images} onChange={e => setFormData({...formData, images: e.target.value})} placeholder="/images/product1.jpg, /images/product2.jpg" />
+              </div>
+              <ImageUpload onUploadSuccess={handleUploadSuccess} label="📁 Quick Image Upload" />
+            </div>
+
+            {formData.images && (
+              <div style={{ display: 'flex', gap: '5px', margin: '10px 0', overflowX: 'auto', padding: '10px' }}>
+                {formData.images.split(',').map((img, idx) => (
+                  <div key={idx} style={{ position: 'relative' }}>
+                    <img src={img.trim()} alt="" style={{ width: 60, height: 60, objectFit: 'cover', borderRadius: '4px' }} />
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="checkbox-group">
               <label className="checkbox-label"><input type="checkbox" checked={formData.inStock} onChange={e => setFormData({...formData, inStock: e.target.checked})} /> In Stock</label>
               <label className="checkbox-label"><input type="checkbox" checked={formData.featured} onChange={e => setFormData({...formData, featured: e.target.checked})} /> Featured</label>
