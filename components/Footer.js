@@ -56,7 +56,7 @@ export default function Footer() {
       </div>
       
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} {settings?.site_name || 'THE AURIKA'}. All rights reserved. {settings?.contact_address || ''}</p>
+        <p>&copy; {new Date().getFullYear()} {settings?.site_name || 'THE AURIKA'}. All rights reserved. {settings?.contact_address || ''} | <span className="design-credit">design by mac studio hub</span></p>
         <div className="footer-payment">
           <span>Razorpay</span>
           <span>Visa</span>

@@ -1341,6 +1341,18 @@ input, textarea, select {
   color: var(--text-light);
 }
 
+.design-credit {
+  color: var(--gold-accent);
+  transition: color 0.3s ease;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.design-credit:hover {
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(196, 153, 92, 0.4);
+}
+
 .footer-payment {
   display: flex;
   gap: 1rem;
