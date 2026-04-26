@@ -4,9 +4,26 @@ import { useState } from 'react';
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) setSubmitted(true);
+    } catch (err) {
+      console.error('Failed to send message', err);
+    }
   };
 
   return (
@@ -46,16 +63,16 @@ export default function ContactPage() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                   <div className="form-group">
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.85rem', color: 'var(--text-light)' }}>Your Name</label>
-                    <input type="text" required style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '0.8rem', color: 'var(--text-main)' }} />
+                    <input name="name" type="text" required style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '0.8rem', color: 'var(--text-main)' }} />
                   </div>
                   <div className="form-group">
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.85rem', color: 'var(--text-light)' }}>Your Email</label>
-                    <input type="email" required style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '0.8rem', color: 'var(--text-main)' }} />
+                    <input name="email" type="email" required style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '0.8rem', color: 'var(--text-main)' }} />
                   </div>
                 </div>
                 <div className="form-group">
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.85rem', color: 'var(--text-light)' }}>Subject of Inquiry</label>
-                  <select required style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '0.8rem', color: 'var(--text-main)' }}>
+                  <select name="subject" required style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '0.8rem', color: 'var(--text-main)' }}>
                     <option value="">Select an option</option>
                     <option value="bespoke">Bespoke Jewelry Customization</option>
                     <option value="order">Order Inquiry</option>
@@ -65,7 +82,7 @@ export default function ContactPage() {
                 </div>
                 <div className="form-group">
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.85rem', color: 'var(--text-light)' }}>Your Message</label>
-                  <textarea rows="5" required style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '0.8rem', color: 'var(--text-main)' }}></textarea>
+                  <textarea name="message" rows="5" required style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '0.8rem', color: 'var(--text-main)' }}></textarea>
                 </div>
                 <button type="submit" className="btn-primary" style={{ padding: '1.5rem', marginTop: '1rem' }}>Send Message</button>
               </form>
