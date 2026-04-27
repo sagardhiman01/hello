@@ -38,9 +38,8 @@ export default function Footer() {
           <h4>Company</h4>
           <ul>
             <li><Link href="/about">Our Story</Link></li>
-            <li><Link href="/sustainability">Sustainability</Link></li>
-            <li><Link href="/stores">Find a Store</Link></li>
-            <li><Link href="/careers">Careers</Link></li>
+            <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link href="/terms-conditions">Terms & Conditions</Link></li>
           </ul>
         </div>
         
@@ -49,6 +48,7 @@ export default function Footer() {
           <ul>
             <li><Link href="/contact">Contact Us</Link></li>
             <li><Link href="/shipping">Shipping & Returns</Link></li>
+            <li><Link href="/refund-policy">Refund & Cancellation</Link></li>
             <li><Link href="/care">Jewelry Care</Link></li>
             <li><Link href="/faq">FAQ</Link></li>
           </ul>
