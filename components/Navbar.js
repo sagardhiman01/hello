@@ -34,10 +34,7 @@ export default function Navbar() {
           </div>
           
           <Link href="/" className="nav-logo">
-            <div className="nav-logo-text">
-              <span style={{textAlign: 'center', marginBottom: '2px'}}>THE</span>
-              AURIKA
-            </div>
+            <img src="/images/logo.png" alt="THE AURIKA" className="nav-logo-img" style={{ height: '50px', width: 'auto' }} />
           </Link>
           
           <ul className="nav-links">
@@ -92,8 +89,7 @@ export default function Navbar() {
       <div className={`mobile-nav ${mobileMenuOpen ? 'active' : ''}`}>
         <div className="mobile-nav-header">
           <div className="nav-logo-text" style={{ fontSize: '1.2rem' }}>
-            <span style={{textAlign: 'left', marginBottom: '2px', fontSize: '0.6rem'}}>THE</span>
-            AURIKA
+            <img src="/images/logo.png" alt="THE AURIKA" style={{ height: '40px', width: 'auto' }} />
           </div>
           <button className="cart-close" onClick={() => setMobileMenuOpen(false)}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
