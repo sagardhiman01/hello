@@ -14,7 +14,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-grid">
         <div className="footer-brand">
-          <img src="/images/logo.png" alt="THE AURIKA" style={{ height: '60px', width: 'auto', marginBottom: '1.5rem' }} />
+          <img src="/images/logo.png" alt="THE AURIKA" style={{ height: '150px', width: 'auto', marginBottom: '1.5rem' }} />
           <p>{settings?.footer_about || 'Find Your Spark. Elevating everyday luxury with meticulously handcrafted jewelry that celebrates life\'s most precious moments.'}</p>
           <div className="footer-social">
             <a href="https://instagram.com/the_aurika_" target="_blank" rel="noopener noreferrer">Ig</a>

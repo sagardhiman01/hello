@@ -36,7 +36,7 @@ export default function AdminLayout({ children }) {
       <aside className={`admin-sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
         <div className="admin-sidebar-header">
           <Link href="/" className="admin-brand">
-            <img src="/images/logo.png" alt="THE AURIKA" style={{ height: '40px', width: 'auto' }} />
+            <img src="/images/logo.png" alt="THE AURIKA" style={{ height: '80px', width: 'auto' }} />
           </Link>
           <span className="admin-badge">ADMIN</span>
         </div>
